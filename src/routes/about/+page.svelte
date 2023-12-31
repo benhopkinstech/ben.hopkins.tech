@@ -1,1 +1,1 @@
-<h1>About</h1>
+<div class="text-4xl">About</div>
