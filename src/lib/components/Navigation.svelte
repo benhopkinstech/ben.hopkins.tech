@@ -1,9 +1,9 @@
 <script>
 	const links = [
-		{ text: 'Home', href: '/' },
-		{ text: 'About', href: '/about' },
-		{ text: 'Experience', href: '/experience' },
-		{ text: 'Contact', href: '/contact' }
+		{ text: 'Home', selector: '#home' },
+		{ text: 'About', selector: '#about' },
+		{ text: 'Experience', selector: '#experience' },
+		{ text: 'Contact', selector: '#contact' }
 	];
 
 	let menuOpen = false;
@@ -11,38 +11,84 @@
 	function toggleMenu() {
 		menuOpen = !menuOpen;
 	}
+
+	let prevScrollPos = typeof window !== 'undefined' ? window.scrollY : 0;
+	let scrollingUp = true;
+
+	if (typeof window !== 'undefined') {
+		window.addEventListener('scroll', () => {
+			const currentScrollPos = window.scrollY;
+			const header = document.querySelector('header');
+			if (!header) return;
+
+			if (prevScrollPos > currentScrollPos && !menuOpen) {
+				scrollingUp = true;
+				header.style.transform = 'translateY(0)';
+			} else {
+				scrollingUp = false;
+				header.style.transform = 'translateY(-100%)';
+			}
+
+			prevScrollPos = currentScrollPos;
+		});
+	}
+
+	/**
+	 * Scrolls to the element specified by the selector.
+	 * @param {string} selector - The CSS selector of the target element.
+	 */
+	const scrollToElement = (selector) => {
+		const element = document.querySelector(selector);
+		if (!element) return;
+
+		let position = element.getBoundingClientRect().top;
+		let offset = position + window.scrollY;
+
+		window.scrollTo({
+			top: offset,
+			behavior: 'smooth'
+		});
+	};
 </script>
 
 <header>
 	<nav>
 		<div>BH</div>
 		<div class="nav-links">
-			{#each links as { text, href }}
-				<a {href}>{text}</a>
+			{#each links as { text, selector }}
+				<a href={'#'} on:click|preventDefault={() => scrollToElement(selector)}>{text}</a>
 			{/each}
 		</div>
 		<button on:click={toggleMenu}> ☰ </button>
 	</nav>
-
-	{#if menuOpen}
-		<div class="drawer">
-			<button on:click={toggleMenu}> X </button>
-			<div class="drawer-links">
-				{#each links as { text, href }}
-					<a {href} on:click={toggleMenu}>{text}</a>
-				{/each}
-			</div>
-		</div>
-	{/if}
 </header>
+
+{#if menuOpen}
+	<div class="full-nav">
+		<button on:click={toggleMenu}> X </button>
+		<div class="full-nav-links">
+			{#each links as { text, selector }}
+				<a
+					href={'#'}
+					on:click|preventDefault={() => {
+						scrollToElement(selector);
+						toggleMenu();
+					}}
+				>
+					{text}
+				</a>
+			{/each}
+		</div>
+	</div>
+{/if}
 
 <style lang="postcss">
 	header {
-		@apply absolute w-screen;
+		@apply fixed w-full bg-red-600 transition transform ease-in-out duration-300;
 	}
 
 	nav {
-		@apply bg-red-600 p-4 text-white flex justify-between items-center;
+		@apply p-4 text-white flex justify-between items-center;
 	}
 
 	nav button {
@@ -61,19 +107,19 @@
 		@apply mr-0;
 	}
 
-	.drawer {
-		@apply md:hidden fixed right-0 top-0 h-screen w-screen bg-gray-300 flex justify-center items-center;
+	.full-nav {
+		@apply md:hidden fixed right-0 top-0 h-screen w-full bg-gray-300 flex justify-center items-center;
 	}
 
-	.drawer button {
+	.full-nav button {
 		@apply absolute top-4 right-4 cursor-pointer;
 	}
 
-	.drawer-links {
+	.full-nav-links {
 		@apply absolute w-3/4;
 	}
 
-	.drawer-links a {
+	.full-nav-links a {
 		@apply block hover:text-red-600 text-left text-4xl mb-8;
 	}
 </style>

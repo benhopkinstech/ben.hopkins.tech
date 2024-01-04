@@ -3,10 +3,7 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 </script>
 
-<div>
+<main>
 	<Navigation />
-
-	<main>
-		<slot />
-	</main>
-</div>
+	<slot />
+</main>

@@ -1,9 +1,18 @@
+<script>
+	import '../app.css';
+	import Home from '$lib/components/Home.svelte';
+	import About from '$lib/components/About.svelte';
+	import Experience from '$lib/components/Experience.svelte';
+	import Contact from '$lib/components/Contact.svelte';
+</script>
+
 <svelte:head>
 	<title>Ben Hopkins</title>
 </svelte:head>
 
-<div class="h-screen flex flex-col items-center justify-center">
-	<div class="text-6xl sm:text-7xl lg:text-8xl font-bold">Ben Hopkins</div>
-	<br />
-	<div class="text-4xl sm:text-5xl lg:text-6xl">Software Developer</div>
+<div>
+	<Home />
+	<About />
+	<Experience />
+	<Contact />
 </div>
