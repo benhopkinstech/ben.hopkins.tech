@@ -1,4 +1,4 @@
-<section id="home">
+<section id="landing">
 	<div class="title">Ben Hopkins</div>
 	<br />
 	<div class="subtitle">Software Developer</div>

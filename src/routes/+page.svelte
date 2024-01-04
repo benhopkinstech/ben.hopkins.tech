@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import Home from '$lib/components/Home.svelte';
+	import Landing from '$lib/components/Landing.svelte';
 	import About from '$lib/components/About.svelte';
 	import Experience from '$lib/components/Experience.svelte';
 	import Contact from '$lib/components/Contact.svelte';
@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div>
-	<Home />
+	<Landing />
 	<About />
 	<Experience />
 	<Contact />

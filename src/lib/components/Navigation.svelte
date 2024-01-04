@@ -1,6 +1,5 @@
-<script>
+<script lang="ts">
 	const links = [
-		{ text: 'Home', selector: '#home' },
 		{ text: 'About', selector: '#about' },
 		{ text: 'Experience', selector: '#experience' },
 		{ text: 'Contact', selector: '#contact' }
@@ -12,32 +11,35 @@
 		menuOpen = !menuOpen;
 	}
 
-	let prevScrollPos = typeof window !== 'undefined' ? window.scrollY : 0;
-	let scrollingUp = true;
-
 	if (typeof window !== 'undefined') {
+		let prevScrollPos = window.scrollY;
+
 		window.addEventListener('scroll', () => {
 			const currentScrollPos = window.scrollY;
 			const header = document.querySelector('header');
 			if (!header) return;
 
 			if (prevScrollPos > currentScrollPos && !menuOpen) {
-				scrollingUp = true;
+				header.style.opacity = '0.8';
 				header.style.transform = 'translateY(0)';
 			} else {
-				scrollingUp = false;
 				header.style.transform = 'translateY(-100%)';
+			}
+
+			if (currentScrollPos === 0) {
+				header.style.opacity = '1';
+				header.style.transform = 'translateY(0)';
 			}
 
 			prevScrollPos = currentScrollPos;
 		});
+
+		window.addEventListener('beforeunload', () => {
+			window.scrollTo(0, 0);
+		});
 	}
 
-	/**
-	 * Scrolls to the element specified by the selector.
-	 * @param {string} selector - The CSS selector of the target element.
-	 */
-	const scrollToElement = (selector) => {
+	const scrollToElement = (selector: string) => {
 		const element = document.querySelector(selector);
 		if (!element) return;
 
@@ -53,7 +55,6 @@
 
 <header>
 	<nav>
-		<div>BH</div>
 		<div class="nav-links">
 			{#each links as { text, selector }}
 				<a href={'#'} on:click|preventDefault={() => scrollToElement(selector)}>{text}</a>
@@ -65,7 +66,6 @@
 
 {#if menuOpen}
 	<div class="full-nav">
-		<button on:click={toggleMenu}> X </button>
 		<div class="full-nav-links">
 			{#each links as { text, selector }}
 				<a
@@ -79,16 +79,17 @@
 				</a>
 			{/each}
 		</div>
+		<button on:click={toggleMenu}> X </button>
 	</div>
 {/if}
 
 <style lang="postcss">
 	header {
-		@apply fixed w-full bg-red-600 transition transform ease-in-out duration-300;
+		@apply fixed bg-gray-300 w-full transition transform ease-in-out duration-300;
 	}
 
 	nav {
-		@apply p-4 text-white flex justify-between items-center;
+		@apply p-4;
 	}
 
 	nav button {
@@ -96,15 +97,11 @@
 	}
 
 	.nav-links {
-		@apply hidden md:flex;
+		@apply hidden md:flex justify-center;
 	}
 
 	.nav-links a {
-		@apply text-white mr-4 hover:text-gray-300;
-	}
-
-	.nav-links a:last-child {
-		@apply mr-0;
+		@apply mx-10 hover:text-white;
 	}
 
 	.full-nav {
@@ -120,6 +117,6 @@
 	}
 
 	.full-nav-links a {
-		@apply block hover:text-red-600 text-left text-4xl mb-8;
+		@apply block hover:text-white text-left text-4xl my-10;
 	}
 </style>
