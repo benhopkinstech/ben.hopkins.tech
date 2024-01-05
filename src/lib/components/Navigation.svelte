@@ -1,14 +1,26 @@
 <script lang="ts">
+	import NavigationFull from '$lib/components/NavigationFull.svelte';
+	import NavigationTop from '$lib/components/NavigationTop.svelte';
+
 	const links = [
 		{ text: 'About', selector: '#about' },
 		{ text: 'Experience', selector: '#experience' },
 		{ text: 'Contact', selector: '#contact' }
 	];
 
-	let menuOpen = false;
+	let showFullNavigation = false;
 
-	function toggleMenu() {
-		menuOpen = !menuOpen;
+	function toggleFullNavigation() {
+		showFullNavigation = !showFullNavigation;
+
+		const body = document.querySelector('body');
+		if (!body) return;
+
+		if (showFullNavigation) {
+			body.style.overflow = 'hidden';
+		} else {
+			body.style.overflow = 'auto';
+		}
 	}
 
 	if (typeof window !== 'undefined') {
@@ -19,7 +31,7 @@
 			const header = document.querySelector('header');
 			if (!header) return;
 
-			if (prevScrollPos > currentScrollPos && !menuOpen) {
+			if (prevScrollPos > currentScrollPos && !showFullNavigation) {
 				header.style.opacity = '0.8';
 				header.style.transform = 'translateY(0)';
 			} else {
@@ -53,70 +65,8 @@
 	};
 </script>
 
-<header>
-	<nav>
-		<div class="nav-links">
-			{#each links as { text, selector }}
-				<a href={'#'} on:click|preventDefault={() => scrollToElement(selector)}>{text}</a>
-			{/each}
-		</div>
-		<button on:click={toggleMenu}> ☰ </button>
-	</nav>
-</header>
+<NavigationTop {links} {scrollToElement} {toggleFullNavigation} />
 
-{#if menuOpen}
-	<div class="full-nav">
-		<div class="full-nav-links">
-			{#each links as { text, selector }}
-				<a
-					href={'#'}
-					on:click|preventDefault={() => {
-						scrollToElement(selector);
-						toggleMenu();
-					}}
-				>
-					{text}
-				</a>
-			{/each}
-		</div>
-		<button on:click={toggleMenu}> X </button>
-	</div>
+{#if showFullNavigation}
+	<NavigationFull {links} {scrollToElement} {toggleFullNavigation} />
 {/if}
-
-<style lang="postcss">
-	header {
-		@apply fixed bg-gray-300 w-full transition transform ease-in-out duration-300;
-	}
-
-	nav {
-		@apply p-4;
-	}
-
-	nav button {
-		@apply md:hidden cursor-pointer;
-	}
-
-	.nav-links {
-		@apply hidden md:flex justify-center;
-	}
-
-	.nav-links a {
-		@apply mx-10 hover:text-white;
-	}
-
-	.full-nav {
-		@apply md:hidden fixed right-0 top-0 h-screen w-full bg-gray-300 flex justify-center items-center;
-	}
-
-	.full-nav button {
-		@apply absolute top-4 right-4 cursor-pointer;
-	}
-
-	.full-nav-links {
-		@apply absolute w-3/4;
-	}
-
-	.full-nav-links a {
-		@apply block hover:text-white text-left text-4xl my-10;
-	}
-</style>
