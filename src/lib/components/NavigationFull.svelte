@@ -15,28 +15,25 @@
 			<a
 				href={'#'}
 				on:click|preventDefault={() => {
-					scrollToElement(selector);
 					toggleFullNavigation();
+					setTimeout(() => {
+						scrollToElement(selector);
+					}, 300);
 				}}
 			>
 				{text}
 			</a>
 		{/each}
 	</div>
-	<button on:click={toggleFullNavigation}> X </button>
 </nav>
 
 <style lang="postcss">
 	nav {
-		@apply md:hidden fixed right-0 top-0 h-screen w-full bg-gray-300 flex justify-center items-center;
-	}
-
-	nav button {
-		@apply absolute top-0 right-0 py-4 px-9 cursor-pointer;
+		@apply md:hidden fixed right-0 top-14 h-full w-full bg-gray-300 flex justify-center items-center;
 	}
 
 	.nav-links {
-		@apply absolute w-3/4;
+		@apply absolute w-3/4 mb-28;
 	}
 
 	.nav-links a {

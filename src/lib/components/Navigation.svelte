@@ -31,15 +31,15 @@
 			const header = document.querySelector('header');
 			if (!header) return;
 
-			if (prevScrollPos > currentScrollPos && !showFullNavigation) {
-				header.style.opacity = '0.8';
+			if (prevScrollPos > currentScrollPos) {
 				header.style.transform = 'translateY(0)';
 			} else {
-				header.style.transform = 'translateY(-100%)';
+				if (!showFullNavigation) {
+					header.style.transform = 'translateY(-100%)';
+				}
 			}
 
 			if (currentScrollPos === 0) {
-				header.style.opacity = '1';
 				header.style.transform = 'translateY(0)';
 			}
 
@@ -65,7 +65,7 @@
 	};
 </script>
 
-<NavigationTop {links} {scrollToElement} {toggleFullNavigation} />
+<NavigationTop {links} {scrollToElement} {toggleFullNavigation} {showFullNavigation} />
 
 {#if showFullNavigation}
 	<NavigationFull {links} {scrollToElement} {toggleFullNavigation} />
