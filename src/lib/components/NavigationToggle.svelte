@@ -16,12 +16,12 @@
 	class:full-nav={showFullNavigation}
 	style="margin-right: {showFullNavigation ? scrollbarWidth : 0}px"
 >
-	<div></div>
+	<div />
 </button>
 
 <style lang="postcss">
 	button {
-		@apply py-[27px] px-4 md:hidden cursor-pointer ml-auto;
+		@apply py-6 px-4 md:hidden cursor-pointer ml-auto;
 	}
 
 	div {

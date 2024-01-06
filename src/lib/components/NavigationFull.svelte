@@ -37,6 +37,6 @@
 	}
 
 	.nav-links a {
-		@apply block hover:text-white text-left text-4xl py-8 px-4;
+		@apply block hover:text-white text-left text-4xl py-6 px-4;
 	}
 </style>

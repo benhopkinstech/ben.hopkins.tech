@@ -1,5 +1,6 @@
 <script lang="ts">
 	import NavigationToggle from '$lib/components/NavigationToggle.svelte';
+	import NavigationDarkMode from '$lib/components/NavigationDarkMode.svelte';
 
 	export let links: Link[];
 	export let scrollToElement: (selector: string) => void;
@@ -14,6 +15,7 @@
 
 <header>
 	<nav>
+		<NavigationDarkMode />
 		<div class="nav-links">
 			{#each links as { text, selector }}
 				<a href={'#'} on:click|preventDefault={() => scrollToElement(selector)}>{text}</a>
@@ -29,7 +31,7 @@
 	}
 
 	nav {
-		@apply flex justify-center;
+		@apply flex justify-between items-center;
 	}
 
 	.nav-links {
@@ -37,6 +39,6 @@
 	}
 
 	.nav-links a {
-		@apply py-4 px-12 hover:text-white;
+		@apply py-4 px-6 hover:text-white;
 	}
 </style>
