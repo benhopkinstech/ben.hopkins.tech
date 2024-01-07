@@ -1,9 +1,9 @@
 <script>
 	import '../app.css';
-	import Landing from '$lib/components/Landing.svelte';
-	import About from '$lib/components/About.svelte';
-	import Experience from '$lib/components/Experience.svelte';
-	import Contact from '$lib/components/Contact.svelte';
+	import Landing from '$lib/components/Landing/Landing.svelte';
+	import About from '$lib/components/About/About.svelte';
+	import Experience from '$lib/components/Experience/Experience.svelte';
+	import Contact from '$lib/components/Contact/Contact.svelte';
 </script>
 
 <svelte:head>
