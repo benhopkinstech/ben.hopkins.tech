@@ -1,6 +1,6 @@
 <script>
 	import '../app.css';
-	import Navigation from '$lib/components/Navigation.svelte';
+	import Navigation from '$lib/components/Navigation/Navigation.svelte';
 </script>
 
 <main>

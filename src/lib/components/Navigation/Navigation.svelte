@@ -1,6 +1,6 @@
 <script lang="ts">
-	import NavigationFull from '$lib/components/NavigationFull.svelte';
-	import NavigationTop from '$lib/components/NavigationTop.svelte';
+	import TopMenu from '$lib/components/Navigation/TopMenu.svelte';
+	import FullMenu from '$lib/components/Navigation/FullMenu.svelte';
 
 	const links = [
 		{ text: 'About', selector: '#about' },
@@ -65,8 +65,8 @@
 	};
 </script>
 
-<NavigationTop {links} {scrollToElement} {toggleFullNavigation} {showFullNavigation} />
+<TopMenu {links} {scrollToElement} {toggleFullNavigation} {showFullNavigation} />
 
 {#if showFullNavigation}
-	<NavigationFull {links} {scrollToElement} {toggleFullNavigation} />
+	<FullMenu {links} {scrollToElement} {toggleFullNavigation} />
 {/if}

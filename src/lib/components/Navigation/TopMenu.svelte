@@ -1,6 +1,6 @@
 <script lang="ts">
-	import NavigationToggle from '$lib/components/NavigationToggle.svelte';
-	import NavigationDarkMode from '$lib/components/NavigationDarkMode.svelte';
+	import DarkMode from '$lib/components/Navigation/DarkMode.svelte';
+	import Toggle from '$lib/components/Navigation/Toggle.svelte';
 
 	export let links: Link[];
 	export let scrollToElement: (selector: string) => void;
@@ -15,13 +15,13 @@
 
 <header>
 	<nav>
-		<NavigationDarkMode />
+		<DarkMode />
 		<div class="nav-links">
 			{#each links as { text, selector }}
 				<a href={'#'} on:click|preventDefault={() => scrollToElement(selector)}>{text}</a>
 			{/each}
 		</div>
-		<NavigationToggle {showFullNavigation} {toggleFullNavigation} />
+		<Toggle {showFullNavigation} {toggleFullNavigation} />
 	</nav>
 </header>
 
