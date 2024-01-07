@@ -6,3 +6,23 @@
 	font-family: 'montserrat';
 	src: url('fonts/montserrat.woff2') format('woff2');
 }
+
+::-webkit-scrollbar {
+	@apply w-2;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-gray-400;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	@apply bg-gray-500;
+}
+
+::-webkit-scrollbar-track {
+	@apply bg-gray-200;
+}
+
+::-webkit-scrollbar-track:hover {
+	@apply bg-gray-300;
+}
