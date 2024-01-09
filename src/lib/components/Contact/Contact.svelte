@@ -8,13 +8,7 @@
 			></path>
 		</svg>
 		<!-- Email -->
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			class="w-12 h-12"
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 			<path
 				stroke-linecap="round"
 				stroke-linejoin="round"
@@ -57,14 +51,14 @@
 
 <style lang="postcss">
 	section {
-		@apply h-screen p-20;
+		@apply p-10 sm:p-12 md:p-14 lg:p-16 xl:p-20;
 	}
 
 	.title {
-		@apply text-4xl sm:text-5xl lg:text-6xl;
+		@apply text-3xl md:text-4xl;
 	}
 
 	.icons {
-		@apply w-12 h-12;
+		@apply w-10 h-10 md:w-12 md:h-12;
 	}
 </style>

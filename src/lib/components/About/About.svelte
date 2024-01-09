@@ -4,10 +4,10 @@
 
 <style lang="postcss">
 	section {
-		@apply h-screen p-20;
+		@apply p-10 sm:p-12 md:p-14 lg:p-16 xl:p-20;
 	}
 
 	.title {
-		@apply text-4xl sm:text-5xl lg:text-6xl;
+		@apply text-3xl md:text-4xl;
 	}
 </style>
