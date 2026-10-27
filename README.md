@@ -30,7 +30,7 @@ src/
   assets/       profile.png (optimised to WebP at build time)
   components/   Header, SocialLinks
   data/         profile.ts (all site content), theme.ts (colours for meta tags and preview image)
-  layouts/      Layout.astro (head, meta tags, fonts, analytics)
+  layouts/      Layout.astro (head, meta tags, fonts)
   pages/        index.astro, 404.astro, og.png.ts (social preview image, rendered at build time)
   styles/       global.css (Tailwind and colour tokens)
 public/         favicons, robots.txt
@@ -45,12 +45,15 @@ colour and social preview image) and `public/favicon.svg`, so change them togeth
 Fonts (Inter and JetBrains Mono) are self-hosted from `@fontsource-variable` packages and bundled
 into `dist/_astro/` at build time.
 
-## Analytics
-
-Cloudflare Web Analytics loads only in production builds, and only when `CF_ANALYTICS_TOKEN`
-is set. Copy `.env.example` to `.env` and paste in the site token, or set the variable in your host's
-build settings. It sets no cookies, so no consent banner is needed.
 
 ## Deploying
 
 Any static host works. Use build command `npm run build` and output directory `dist`.
+
+This site is hosted on Cloudflare Pages, which builds from this GitHub repo using those settings.
+Only pushes to `main` are deployed, and they go straight to production.
+
+Two files configure Cloudflare:
+
+- `public/_headers` caches the hashed files in `/_astro/` for a year and adds a few security headers.
+- `.node-version` sets the Node version Cloudflare builds with.

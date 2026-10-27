@@ -5,7 +5,6 @@ import '../styles/global.css';
 import interLatin from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
 import { profile, metaDescription } from '../data/profile';
 import { colours } from '../data/theme';
-import { CF_ANALYTICS_TOKEN } from 'astro:env/client';
 
 interface Props {
   title?: string;
@@ -22,9 +21,6 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
-
-// Only load analytics on the built site, and only once a token is configured.
-const analyticsToken = import.meta.env.PROD ? CF_ANALYTICS_TOKEN : undefined;
 ---
 
 <!doctype html>
@@ -59,15 +55,5 @@ const analyticsToken = import.meta.env.PROD ? CF_ANALYTICS_TOKEN : undefined;
   </head>
   <body class="min-h-screen">
     <slot />
-    {
-      analyticsToken && (
-        <script
-          is:inline
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={JSON.stringify({ token: analyticsToken })}
-        />
-      )
-    }
   </body>
 </html>
