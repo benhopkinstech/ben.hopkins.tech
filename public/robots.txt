@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ben.hopkins.tech/sitemap-index.xml
