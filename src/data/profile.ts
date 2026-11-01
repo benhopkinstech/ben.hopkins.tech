@@ -17,6 +17,7 @@ export interface Profile {
   role: string;
   company: string;
   intro: string;
+  sourceUrl: string;
   socials: SocialLink[];
 }
 
@@ -27,7 +28,7 @@ export const profile: Profile = {
   company: 'Lloyds Banking Group',
   intro:
     "I build backend systems and love squeezing every bit of performance out of them. I'm also exploring how AI is reshaping the way we build software.",
-
+  sourceUrl: 'https://github.com/benhopkinstech/ben.hopkins.tech',
   socials: [
     {
       label: 'LinkedIn',

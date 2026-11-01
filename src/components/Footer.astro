@@ -1,0 +1,17 @@
+---
+import { profile } from '../data/profile';
+---
+
+<footer class="mx-auto max-w-3xl px-6 pb-10">
+  <div class="border-t border-stone-200 pt-6 font-mono text-xs text-stone-500">
+    <a
+      href={profile.sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="hover:text-accent"
+    >
+      <span class="text-accent" aria-hidden="true">&lt;/&gt;</span> view source on GitHub
+      <span class="sr-only">(opens in a new tab)</span>
+    </a>
+  </div>
+</footer>
